@@ -1,0 +1,11 @@
+CORRECCION
+https://docs.google.com/spreadsheets/d/1DgBwDLB76fF1oEAFL0x5a8JKdg-Un0d2UMNcLcGhec8/edit#gid=0
+
+
+Únicos Endpoints/Flags que pueden utilizar
+GET https://restcountries.com/v3/all
+GET https://restcountries.com/v3/name/{name}
+GET https://restcountries.com/v3/alpha/{code}
+
+
+FRONT:

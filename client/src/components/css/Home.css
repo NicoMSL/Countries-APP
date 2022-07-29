@@ -1,0 +1,62 @@
+.div {
+  color: rgba(209, 209, 209, 0.762);
+  text-align: center;
+  background-color: #141428d6;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+}
+
+.titulo {
+  text-align: left;
+  margin-top: -10px;
+  padding-top: 20px;
+  padding-left: 25px;
+  color: rgba(255, 253, 253, 0.905);
+  font-size: 4em;
+}
+
+.boton{
+  margin: 50px;
+  margin-top: -50px;
+}
+
+.filtrado{
+  margin-top: -50px;
+}
+.tarjeta{
+  text-align: center;
+  display: inline-block;
+  vertical-align: top ;
+  background-color: rgba(79, 134, 181, 0.231);
+  border-radius: 50px;
+  margin: 15px;
+  padding-bottom: 10px;
+  color: beige;
+  height: 250px;
+  width: 250px;
+}
+.tarjeta:hover{
+  background-color: rgba(0, 0, 0, 0.33);
+}
+
+.bloque{
+  text-align: center;
+  display: inline-block;
+  vertical-align: top ;
+  margin: 5px;
+  background-color: rgba(240, 248, 255, 0.237);
+  padding: 10px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
