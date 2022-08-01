@@ -17,7 +17,7 @@ const allCountries = useSelector((state)=> state.countries)
 const activities = useSelector((state) => state.activities);
 //paginado
 const [currentPage, setCurrentPage] = useState(1) 
-const [countriesPerPage, setCountriesPerPage] = useState(10) //countries por pagina
+const [countriesPerPage, setCountriesPerPage] = useState(9) //countries por pagina
 const indexOfLastCountry = currentPage * countriesPerPage
 const indexOfFirstCountry = indexOfLastCountry - countriesPerPage
 const currentCountries = allCountries.slice(indexOfFirstCountry,indexOfLastCountry)
@@ -25,6 +25,9 @@ const currentCountries = allCountries.slice(indexOfFirstCountry,indexOfLastCount
 const [orden, setOrden] = useState(``)
 const [orden2, setOrden2] = useState(``)
 
+// function asd(){
+//   setCountriesPerPage(10)
+// }
 
 const paginado = (pageNumber) =>{
   setCurrentPage(pageNumber)
@@ -58,11 +61,13 @@ function handleSort2(e){
 function handleFilterContinent(e){
   e.preventDefault();
   dispatch(filterCountriesByContinent(e.target.value))
+  setCurrentPage(1)
 }
 
 function handleFilterActivity(e){
   e.preventDefault();
   dispatch(filterCountriesByActivity(e.target.value))
+  setCurrentPage(1)
 }
 
 
@@ -115,8 +120,9 @@ return(
       </select>
   </div>
 </div>
-<SearchBar className="busqueda"></SearchBar>
+<SearchBar setCurrentPage={setCurrentPage} className="busqueda"></SearchBar>
 <Paginado 
+setCountriesPerPage={setCountriesPerPage}
 countriesPerPage={countriesPerPage}
 allCountries={allCountries.length}
 paginado= {paginado}

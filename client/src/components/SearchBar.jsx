@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getCountryByName } from "../actions";
 
 
-export default function SearchBar(){
+export default function SearchBar({setCurrentPage}){
   const dispatch = useDispatch()
   const [name, setName] = useState("")
 
@@ -19,6 +19,7 @@ function handleSubmit(e){
   if(!name) return alert("Escribi un nombre")
   dispatch(getCountryByName(name))
   setName("")
+  setCurrentPage(1)
 }
 
 
