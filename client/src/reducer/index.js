@@ -34,7 +34,7 @@ function rootReducer (state= initialState, action){
 
     case "FILTER_BY_ACTIVITY":
       const allCountriesa = state.allCountriesState
-      const continentFiltered2 = allCountriesa.filter((c)=> c.activities.find((a) => a.id === action.payload));
+      const continentFiltered2 = allCountriesa.filter((c)=> c.activities.find((a) => a.id === action.payload));                                         
       return{
         ...state,
         countries: continentFiltered2

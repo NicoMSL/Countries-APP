@@ -14,8 +14,7 @@ let idDb = 1
 
 router.get("/countries",async (req, res)=>{
   const name = req.query.name
-  //console.log(await Country.findAll({limit:10}))
-  if(!name)return res.json(await Country.findAll())
+  if(!name)return res.json(await Country.findAll({include: Activity}))
   if(name){
     try{
       let pais = await Country.findAll({
@@ -23,7 +22,7 @@ router.get("/countries",async (req, res)=>{
           nombre:{
             [Op.iLike]: "%" + name + "%"
           }
-        }
+        },
       });
       return res.json(pais)
     } 
@@ -41,7 +40,8 @@ router.get("/countries/:id", async (req, res)=>{
         id:{
           [Op.eq]:id.toUpperCase()
         } 
-      }
+      },
+      include: Activity
     });
     if(coun)return res.json(coun)
     res.status(404).send(`ID: "${id}" no corresponde a un pais existente`)
@@ -70,7 +70,7 @@ router.post("/activity", async(req,res)=>{
       },
     });
     console.log(created)
-    await activity.setCountries(countryId)
+    await activity.addCountries(countryId)
     return res.json(activity)
   }catch (error) {
     console.log("Error en alguno de los datos provistos");
