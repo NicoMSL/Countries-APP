@@ -72,7 +72,6 @@ return(
     <h1 className="titulo">Look how many countries</h1>
     <button className="boton" onClick={e=>{handleClick(e)}}> Reload countries</button>
     <Link to= "/activity"><button className="boton">Create activity</button></Link>
-
 <div className="filtrado">
       <h3>Filter continets:</h3> 
   <div className="bloque">
@@ -125,11 +124,11 @@ paginado= {paginado}
 
     {currentCountries?.map(a=>{
       return(
-        <fragment className="tarjeta">
           <Link to={"/details/" + a.id}>
+        <fragment className="tarjeta">
         <Country  nombre={a.nombre} id={a.id} bandera={a.bandera} capital={a.capital} continente={a.continente} subregion={a.subregion} area={a.area} poblacion={a.poblacion}/> 
-          </Link>
         </fragment>
+          </Link>
         ); 
       })
     }

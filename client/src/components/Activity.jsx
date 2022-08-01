@@ -74,10 +74,10 @@ function handleSubmit(e){
   return (
     <div className="div">
       <Link to="/home">
-        <button className="boton">Go Back</button>
+        <button className="boton" id="btna">Go Back</button>
       </Link>
       <h1>Create activity</h1>
-      <form onSubmit={(e)=>handleSubmit(e)}>
+      <form className="from" onSubmit={(e)=>handleSubmit(e)}>
         <label>Name: </label>
         <input type="text" value={input.nombre} autoComplete="off" placeholder="Please write a name..." name="nombre" onChange={(e)=>handleChange(e)}/>
         <label>Duration: </label>

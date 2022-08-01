@@ -2,6 +2,7 @@
   color: rgba(209, 209, 209, 0.762);
   text-align: left;
   background-color: #141428d6;
+  height:100vh
 }
 
 .bienvenidos {
@@ -23,6 +24,7 @@
 .texto {
   text-align: left;
   font-size: 1.5em; 
+  margin-top: -25px;
   margin-left: 50px;
   margin-right: 200px;
   border-radius: 15px;
@@ -35,8 +37,7 @@
   margin-top: 25px;
 }
 
-/* #btnlanding{
-  margin-top: 25px;
-  margin-left:-1200px;
-} */
+#btnlanding{
+  margin-top: 25px; 
+}
 
