@@ -10,7 +10,7 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
+let idDb = 1
 
 router.get("/countries",async (req, res)=>{
   const name = req.query.name
@@ -51,27 +51,30 @@ router.get("/countries/:id", async (req, res)=>{
   }
 });
 
-router.post("/activity", async(req,res)=>{
-  let {
-    id,
-    nombre,
-    dificultad,
-    Duracion,
-    temporada
-  }= req.body
-  if(!nombre || !dificultad || !Duracion || !temporada){res.send(404).json({msg: "Faltan datos"})}
-  let activityCreated = await Activity.create({
-    id:++id,
-    nombre,
-    dificultad,
-    Duracion,
-    temporada
-  })
-  let activityCreatedDB = await Activity.findAll({
-    where:{nombre: Activity}
-  })
-  activityCreated.addActivity(activityCreatedDB)
-  res.send("Activity created")
+router.get("/activity", async(req,res)=>{
+const activity = await Activity.findAll()
+return res.json(activity)
 })
+
+
+router.post("/activity", async(req,res)=>{
+  const {nombre, dificultad, Duracion, temporada, countryId }= req.body
+  if(!nombre || !dificultad || !Duracion || !temporada || countryId.length === 0){res.send(404).json({msg: "Faltan datos"})}
+  try{
+    const [activity, created] = await Activity.findOrCreate({
+      where:{
+        nombre,
+        Duracion,
+        dificultad,
+        temporada
+      },
+    });
+    console.log(created)
+    await activity.setCountries(countryId)
+    return res.json(activity)
+  }catch (error) {
+    console.log("Error en alguno de los datos provistos");
+    return res.status(404).send("Error en alguno de los datos provistos");
+}})
 
 module.exports = router;

@@ -26,6 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM("Summer", "Fall", "Winter", "Spring", "All the year"),
       allowNull: false,
     },
+  
     
   });
 };

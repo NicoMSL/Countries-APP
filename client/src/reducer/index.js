@@ -13,7 +13,12 @@ function rootReducer (state= initialState, action){
         ...state,
         allCountriesState: action.payload,
         countries: action.payload
-    }
+      }
+    case "GET_ALL_ACTIVITIES":
+      return{
+        ...state,
+        activities: action.payload
+      }
     case "GET_NAME_COUNTRIES":
       return{
         ...state,
@@ -26,6 +31,15 @@ function rootReducer (state= initialState, action){
         ...state,
         countries: continentFiltered
       }
+
+    case "FILTER_BY_ACTIVITY":
+      const allCountriesa = state.allCountriesState
+      const continentFiltered2 = allCountriesa.filter((c)=> c.activities.find((a) => a.id === action.payload));
+      return{
+        ...state,
+        countries: continentFiltered2
+      }
+      
       case "ORDER_BY_NAME":
       let sortedArr = action.payload ==="abc"?
       state.countries.sort(function(a,b){
@@ -84,11 +98,6 @@ function rootReducer (state= initialState, action){
         return{
           ...state,
           detail: action.payload
-        }
-      case "GET_ACTIVITY":
-        return{
-          ...state,
-          activities: action.payload
         }
       
 

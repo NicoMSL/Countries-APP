@@ -29,9 +29,8 @@ return(
     <p>Cuenta con un area de: {myCountry.area}km² y una Poblacion de: {myCountry.poblacion}</p>
 		</div>
 <Link to="/home">
-	<button> Go back</button>
+	<button className="boton"> Go back</button>
 </Link>
 	</div>
 )
-
 }

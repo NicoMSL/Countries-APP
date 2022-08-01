@@ -11,8 +11,7 @@ export default function Paginado({ countriesPerPage,allCountries,paginado }){
   return (
     <nav>
       <ul className="paginado">
-        {pageNumbers &&
-          pageNumbers.map(number => (
+        {pageNumbers?.map(number => (
             <li className="number" key={number}>
             <a onClick={() => paginado(number)}>{number}</a>
             </li>

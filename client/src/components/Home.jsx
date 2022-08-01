@@ -1,12 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getCountries, filterCountriesByContinent, orderByName, orderByPoblation } from "../actions";
+import { getCountries, filterCountriesByContinent, filterCountriesByActivity, orderByName, orderByPoblation, getAllActivities } from "../actions";
 import { Link } from "react-router-dom"
 import Country from "./Country";
 import Paginado from "./Paginado";
 import SearchBar from "./SearchBar";
-import Activity from "./Activity";
 import "./css/Home.css";
 
 
@@ -15,6 +14,7 @@ export default function Home(){
 
 const dispatch = useDispatch()
 const allCountries = useSelector((state)=> state.countries)
+const activities = useSelector((state) => state.activities);
 //paginado
 const [currentPage, setCurrentPage] = useState(1) 
 const [countriesPerPage, setCountriesPerPage] = useState(10) //countries por pagina
@@ -25,13 +25,13 @@ const currentCountries = allCountries.slice(indexOfFirstCountry,indexOfLastCount
 const [orden, setOrden] = useState(``)
 const [orden2, setOrden2] = useState(``)
 
-const activities = useSelector((state) => state.activities);
 
 const paginado = (pageNumber) =>{
   setCurrentPage(pageNumber)
 }
 
 useEffect(()=>{
+  dispatch(getAllActivities());
   dispatch(getCountries());
 },[dispatch])
 
@@ -54,13 +54,15 @@ function handleSort2(e){
   setOrden2(`Ordenado${e.target.value}`)
 };
 
-
-
 //filtrado
 function handleFilterContinent(e){
   e.preventDefault();
-  
   dispatch(filterCountriesByContinent(e.target.value))
+}
+
+function handleFilterActivity(e){
+  e.preventDefault();
+  dispatch(filterCountriesByActivity(e.target.value))
 }
 
 
@@ -88,12 +90,14 @@ return(
   </div>
   <div className="bloque">
     <p>Actividades:</p>
-    <select>
+    <select onChange={(e)=>handleFilterActivity(e)}>
         <option hidden value="">Select activity...</option>
-          {activities.map((a)=>(
-            <option>{a.nombre}</option>
-            ) )}
+        { activities.map((a)=>
+          <option value={a.id} key={a.id}>{a.nombre}</option>
+        )
+        }
         </select>
+
   </div>
   <div className="bloque">
     <p>Orden Alfabetico:</p>
@@ -119,7 +123,7 @@ allCountries={allCountries.length}
 paginado= {paginado}
 />
 
-    {currentCountries.map((a)=>{
+    {currentCountries?.map(a=>{
       return(
         <fragment className="tarjeta">
           <Link to={"/details/" + a.id}>

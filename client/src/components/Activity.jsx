@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getAllActivities, getCountries, postActivity } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import "./css/Activity.css";
 
 
 
@@ -25,6 +26,7 @@ export default function Activity() {
   
   useEffect(() => {
     dispatch(getAllActivities());
+    dispatch(getCountries());
   }, []);
 
 function handleChange(e){
@@ -44,8 +46,8 @@ function handleSelect(e){
 
 function OnCloseFlag(id){
 let depuratedIds = input.countryId.filter((el) => el !== id);
-let addC = allCountriesbd.find(el => el.id === id)
-console.log(addC)
+//let addC = allCountriesbd.find(el => el.id === id)
+//console.log(addC)
   setInput({
     ...input,
     countryId: depuratedIds, // -> agrego al array el ID del pais
@@ -70,7 +72,7 @@ function handleSubmit(e){
 
 
   return (
-    <div>
+    <div className="div">
       <Link to="/home">
         <button className="boton">Go Back</button>
       </Link>
@@ -104,8 +106,7 @@ function handleSubmit(e){
         <option hidden value="">Countries to practice this activity...</option>
           {allCountries.map((c)=>(
             <option value={c.id}>{c.nombre}</option>
-            
-          ) )}
+          ))}
         </select>
         <ul><li>{input.countryId.map((c)=>(
           <div>
