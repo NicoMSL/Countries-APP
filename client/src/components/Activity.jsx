@@ -37,7 +37,7 @@ function handleChange(e){
 }
 
 function handleSelect(e){
-  allCountries.shift(e)
+  //allCountries.shift(e)
   setInput({
     ...input,
     countryId:[...input.countryId,e.target.value]
@@ -45,9 +45,9 @@ function handleSelect(e){
 }
 
 function OnCloseFlag(id){
-let depuratedIds = input.countryId.filter((el) => el !== id);
-//let addC = allCountriesbd.find(el => el.id === id)
-//console.log(addC)
+  let depuratedIds = input.countryId.filter((el) => el !== id);
+  //allCountries.push(allCountriesbd.filter(a=>a.id))
+  //console.log(allCountriesbd.filter(a=>a.id))
   setInput({
     ...input,
     countryId: depuratedIds, // -> agrego al array el ID del pais

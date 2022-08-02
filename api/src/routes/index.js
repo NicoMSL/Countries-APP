@@ -10,7 +10,6 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-let idDb = 1
 
 router.get("/countries",async (req, res)=>{
   const name = req.query.name

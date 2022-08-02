@@ -25,7 +25,7 @@ export default function Detail(props) {
         <h5>
           Capital: {myCountry.capital} Continente: {myCountry.continente}
         </h5>
-        <h6>{myCountry.subregion}</h6>
+        <h6>Subregion: {myCountry.subregion}</h6>
         <p>
           Cuenta con un area de: {myCountry.area}km² y una Poblacion de:{" "}
           {myCountry.poblacion}
