@@ -5,3 +5,13 @@
     margin-top: 50px;
 }
 
+.sep{
+    margin: 4px;
+    font-size: medium;
+}
+
+.err{
+    color: red;
+    font-size: larger;
+    margin-top: -5px;
+}

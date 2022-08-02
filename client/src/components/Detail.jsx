@@ -28,7 +28,7 @@ export default function Detail(props) {
         <h6>Subregion: {myCountry.subregion}</h6>
         <p>
           Cuenta con un area de: {myCountry.area}km² y una Poblacion de:{" "}
-          {myCountry.poblacion}
+          {myCountry.poblacion} habitantes
         </p>
         <div >
           {myCountry.activities?.length > 0 ?(
