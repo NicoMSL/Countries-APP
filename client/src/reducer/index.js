@@ -99,6 +99,11 @@ function rootReducer (state= initialState, action){
           ...state,
           detail: action.payload
         }
+      case "DELETE_ACTIVITY":
+        return {
+        ...state,
+        activities: action.payload
+        };
       
 
     default:

@@ -55,10 +55,9 @@ const activity = await Activity.findAll()
 return res.json(activity)
 })
 
-
 router.post("/activity", async(req,res)=>{
   const {nombre, dificultad, Duracion, temporada, countryId }= req.body
-  if(!nombre || !dificultad || !Duracion || !temporada || countryId.length === 0){res.send(404).json({msg: "Faltan datos"})}
+  if(!nombre || !dificultad || !Duracion || temporada.length === 0 || countryId.length === 0){res.send(404).json({msg: "Faltan datos"})}
   try{
     const [activity, created] = await Activity.findOrCreate({
       where:{
@@ -75,5 +74,19 @@ router.post("/activity", async(req,res)=>{
     console.log("Error en alguno de los datos provistos");
     return res.status(404).send("Error en alguno de los datos provistos");
 }})
+
+router.delete("/activity/:id",async (req, res)=>{
+  const id = req.params.id
+  try {
+    let deleteActivity = await Activity.destroy({where:{id:id}})
+    const activity = await Activity.findAll()
+    return deleteActivity === 0
+    ?res.status(404).send("something went wrong :c")
+    :res.status(200).send("Activity deleted")
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send("something went wrong2 :c")
+  }
+})
 
 module.exports = router;

@@ -19,6 +19,7 @@ return dispatch({
 })
 }
 }
+
 export function getCountryByName(name){
   return async function(dispatch){
     try{
@@ -63,26 +64,50 @@ export function orderByPoblation(payload){
 
 export function getDetail(id){
   return async function(dispatch){
-    try{
-      var json = await axios.get("http://localhost:3001/countries/"+ id);
+      await axios.get("http://localhost:3001/countries/"+ id)
+      .then((el) =>{
       return dispatch({
         type:"GET_DETAILS",
-        payload: json.data
+        payload: el.data
       })
-    }catch(error){
+    })
+    .catch((error)=>{
       console.log(error)
-    }
+    })
   }
 }
 
+// export function getDetail(id){
+//   return function(dispatch){
+//     try{
+//       var json = await axios.get("http://localhost:3001/countries/"+ id);
+//       return dispatch({
+//         type:"GET_DETAILS",
+//         payload: json.data
+//       })
+//     }catch(error){
+//       console.log(error)
+//     }
+//   }
+// }
+
 export function postActivity(payload){
   return async function(dispatch){
-    const response = axios.post("http://localhost:3001/activity", payload);
+    const json = await axios.post("http://localhost:3001/activity", payload);
     return dispatch({
       type: "POST_ACTIVITY",
-      payload: response.data
+      payload: json.data
     });
+  }
+}
 
+export function deleteActivity(id){
+  return async function(dispatch){
+      const json = await axios.delete("http://localhost:3001/activity/"+id)
+      return dispatch({
+        type: "DELETE_ACTIVITY",
+        PAYLOAD: json.data
+      });
   }
 }
 

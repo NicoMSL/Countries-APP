@@ -21,28 +21,24 @@ export default function Home() {
   const activities = useSelector((state) => state.activities);
   //paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const [countriesPerPage, setCountriesPerPage] = useState(9); //countries por pagina
+  const [countriesPerPage, setCountriesPerPage] = useState(9);
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
   const currentCountries = allCountries.slice(
     indexOfFirstCountry,
     indexOfLastCountry
   );
-
-  const [orden, setOrden] = useState(``);
-  const [orden2, setOrden2] = useState(``);
-
-  // function asd(){
-  //   setCountriesPerPage(10)
-  // }
-
+  
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  
+  const [orden, setOrden] = useState(``);
+  const [orden2, setOrden2] = useState(``);
 
   useEffect(() => {
+    dispatch(getCountries());  
     dispatch(getAllActivities());
-    dispatch(getCountries());
   }, [dispatch]);
 
   function handleClick(e) {
@@ -63,7 +59,6 @@ export default function Home() {
     dispatch(orderByPoblation(e.target.value));
     setOrden2(`Ordenado${e.target.value}`);
   }
-
   //filtrado
   function handleFilterContinent(e) {
     e.preventDefault();
@@ -86,7 +81,6 @@ export default function Home() {
           handleClick(e);
         }}
       >
-        {" "}
         Reload countries
       </button>
       <Link to="/activity">
@@ -107,12 +101,11 @@ export default function Home() {
             <option value="South America">South America</option>
           </select>
         </div>
+        
         <div className="bloque">
           <p>Activities:</p>
           <select onChange={(e) => handleFilterActivity(e)}>
-            <option hidden value="">
-              Select activity...
-            </option>
+            <option hidden value="">Select activity...</option>
             {activities.map((a) => (
               <option value={a.id} key={a.id}>
                 {a.nombre}
@@ -123,9 +116,7 @@ export default function Home() {
         <div className="bloque">
           <p>Alphabetical order:</p>
           <select onChange={(e) => handleSort(e)}>
-            <option hidden value="">
-            Order alphabetically
-            </option>
+            <option hidden value="">Order alphabetically</option>
             <option value="abc">A to Z</option>
             <option value="zxy">Z to A</option>
           </select>
@@ -134,7 +125,7 @@ export default function Home() {
           <p>Poblation:</p>
           <select onChange={(e) => handleSort2(e)}>
             <option hidden value="">
-            Sort by population
+              Sort by population
             </option>
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -145,16 +136,21 @@ export default function Home() {
         setCurrentPage={setCurrentPage}
         className="busqueda"
       ></SearchBar>
-      <Paginado
-        setCountriesPerPage={setCountriesPerPage}
-        countriesPerPage={countriesPerPage}
-        allCountries={allCountries.length}
-        paginado={paginado}
-      />
+      <div>
+        <Paginado
+          setCountriesPerPage={setCountriesPerPage}
+          setCurrentPage={setCurrentPage}
+          countriesPerPage={10}
+          allCountries={allCountries.length}
+          paginado={paginado}
+          currentPage={currentPage}
+        />
+
+      </div>
 
       {currentCountries?.map((a) => {
         return (
-          <Link to={"/details/" + a.id}>
+          <Link onClick={() => {window.location.href=`/details/${a.id}`}}>
             <fragment className="tarjeta">
               <Country
                 nombre={a.nombre}

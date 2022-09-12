@@ -33,6 +33,6 @@ module.exports = (sequelize) => {
     },
     poblacion: {
       type: DataTypes.BIGINT,
-    },   
+    }, 
   });
 };

@@ -14,6 +14,24 @@
   border-radius: 50px;
   margin: 15px;
   color: beige;
-  height: 175px;
+  height: 225px;
   width: 250px;
+}
+
+.btnd{
+  min-width: 75px;
+  height: 40px;
+  padding: 5px 5px;
+  transition: all 0.3s ease;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #b32424;
+}
+.btnd:hover{
+  background-color: #842424
+}
+.btnd:active{
+  height: 5vmin;
 }

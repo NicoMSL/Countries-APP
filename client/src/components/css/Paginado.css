@@ -6,6 +6,9 @@
   display: inline-block;
   vertical-align: top ;
   list-style: none;
+  
+}
+.notnumerito{
   margin: 6px;
   color: rgba(172, 172, 172, 0.905);
   background-color: rgba(56, 56, 56, 0.627);
@@ -13,6 +16,35 @@
   padding: 9px;
   border-radius: 5px;
 }
-.number:hover {
+
+.notnumerito:hover {
   background-color: rgba(10, 10, 10, 0.643);
+}
+
+.numerito{
+  margin: 6px;
+  background-color: #3a86ff;
+  color: rgb(255, 255, 255);
+  font-size: 1.2em; 
+  padding: 9px;
+  border-radius: 5px;
+}
+.numerito:hover {
+  background-color: #2d66c1;
+}
+.btnpn{
+  min-width: 75px;
+  height: 40px;
+  padding: 5px 5px;
+  transition: all 0.3s ease;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-color: #3a86ff;
+}
+.btnpn:hover{
+  background-color: #3472d7
+}
+.btnpn:active{
+  height: 5vmin;
 }

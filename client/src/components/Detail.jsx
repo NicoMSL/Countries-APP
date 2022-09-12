@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../actions";
+import { deleteActivity,  getDetail } from "../actions";
 import { useEffect } from "react";
 import "./css/Detail.css";
 
@@ -9,14 +9,21 @@ export default function Detail(props) {
   const id = props.match.params.id;
   const myCountry = useSelector((state) => state.detail);
   const dispatch = useDispatch();
-  //console.log("id", id, myCountry);
+
   
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch]);
 
-  //console.log("MY COUNTRY", myCountry)
-
+  function handleDelete(id){
+    dispatch(deleteActivity(id))
+    dispatch(getDetail(myCountry.id))
+    console.log(id)
+    window.location.reload()
+  }
+  
+  
+  
   return (
     <div className="div">
       <div>
@@ -38,9 +45,18 @@ export default function Detail(props) {
                 <p>Duracion: {a.Duracion} hs</p>
                 <p>Dificultad: {a.dificultad}/5</p>
                 <p>Temporada: {a.temporada}</p>
+                <div>
+                  <button className="btnd"onClick={()=>{handleDelete(a.id)}}>Delete activity</button>
+                </div>
               </div>
             )
-          )):(<p>No posee actividades creadas</p>)}
+          )):(<div>
+            <p>It does not have activities created</p>
+          <Link to="/activity">
+        <button className="boton">Create activity</button>
+      </Link>
+            </div>
+      )}
         </div>
       </div>
 

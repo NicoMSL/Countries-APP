@@ -37,8 +37,18 @@ function handleChange(e){
   })
 }
 
+function handleCheck(e){
+  if(e.target.checked)
+  setInput({
+    ...input,
+    temporada:e.target.value
+    //temporada:[...input.temporada,e.target.value]
+  })
+}
+
 function handleSelect(e){
   //allCountries.shift(e)
+  if(input.countryId.includes(e.target.value)){return}
   setInput({
     ...input,
     countryId:[...input.countryId,e.target.value]
@@ -62,6 +72,9 @@ function validacion(input){
   if(input.Duracion>6 ||input.Duracion<1){errors.Duracion = "Select a duration between 1hs and 6hs";}
   if(input.dificultad === ""){errors.dificultad = "Please select a difficulty";}
   if(input.temporada === ""){errors.temporada = "Please select a season";}
+  //if(input.temporada.length === 0){errors.temporada = "Please select a season";}
+  //if(input.temporada.length > 1){errors.temporada = "Please select only one season";}
+  //if(input.temporada.length > 1 && input.temporada.includes("All the year")){errors.temporada = `You can not select "All the year" and another option`;}
   if(input.countryId.length === 0){errors.countryId = "Please select at least one country";}
   
 
@@ -70,16 +83,13 @@ function validacion(input){
 
 function handleSubmit(e){
   e.preventDefault();
-
   let val = validacion(input);
   setErrors(val)
-
   if(Object.keys(val).length >0 ){
     alert("Fix errors");
     val = {}
     return
   }
-
   console.log(input)
   dispatch(postActivity(input))
   alert("Activity Created")
@@ -103,9 +113,9 @@ function handleSubmit(e){
       <h1>Create activity</h1>
       <form className="from" onSubmit={(e)=>handleSubmit(e)}>
         <label className="sep">Name: </label>
-        <input className="sep" type="text" value={input.nombre} autoComplete="off" placeholder="Please write a name..." name="nombre" onChange={(e)=>handleChange(e)}/><br/>
+        <input  className="sep" type="text" value={input.nombre} autoComplete="off" placeholder="Please write a name..." name="nombre" onChange={(e)=>handleChange(e)}/><br/>
         {errors.nombre &&<p className="err">{errors.nombre}</p>}
-        <label className="sep">Duration: </label>
+        <label className="sep">Duration {"(1 to 6 hours)"}: </label>
         <input className="sep" type="number" placeholder="in hs" min="1" max="6" value={input.Duracion} name="Duracion" onChange={(e)=>handleChange(e)} /> <br/>
         {errors.Duracion &&<p className="err">{errors.Duracion}</p>}
         <label className="sep">Dificult: </label>
@@ -118,16 +128,27 @@ function handleSubmit(e){
         <option value="5">5 - Very Difficult</option>
         </select><br/>
         {errors.dificultad &&<p className="err">{errors.dificultad}</p>}
-        <label className="sep">Season: </label>
-        <select className="sep"value={input.temporada} name="temporada"onChange={(e)=>handleChange(e)}>
+
+        <label className="sep">Season: </label><br/>
+        <div>
+        <label><input onChange={(e)=>handleCheck(e)} className="checkB" type="radio" name="check" value="All the year"  />All the year</label><br/>
+        <label><input onChange={(e)=>handleCheck(e)} className="checkB" type="radio" name="check" value="Summer" />Summer</label>
+        <label><input onChange={(e)=>handleCheck(e)} className="checkB" type="radio" name="check" value="Fall" />Fall</label><br/>
+        <label><input onChange={(e)=>handleCheck(e)} className="checkB" type="radio" name="check" value="Spring" />Spring</label>
+        <label><input onChange={(e)=>handleCheck(e)} className="checkB" type="radio" name="check" value="Winter" />Winter</label><br/>
+        </div>
+        
+        {/* <select className="sep"value={input.temporada} name="temporada"onChange={(e)=>handleChange(e)}>
         <option hidden value="" >Season of the activity...</option>
         <option value="All the year">All the year</option>
         <option value="Fall">Fall</option>
         <option value="Summer">Summer</option>
         <option value="Spring">Spring</option>
         <option value="Winter">Winter</option>
-        </select><br/>
+        </select><br/> */}
         {errors.temporada &&<p className="err">{errors.temporada}</p>}
+
+
         <label className="sep">Countries: </label>
         <select className="sep"  value={input.countryId} name="countryId" onChange={(e)=>handleSelect(e)}>
         <option hidden value="">Countries to practice this activity...</option>

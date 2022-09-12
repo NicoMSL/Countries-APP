@@ -50,7 +50,20 @@
   border-radius: 15px;
   margin-bottom: 30px;
 }
+#pn{
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  color: #fff;
+}
 
+
+.diva{
+  min-width: 75px;
+  display: inline-block;
+  margin: 5px;
+  padding: -50px;
+}
 
 
 
