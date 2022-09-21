@@ -49,7 +49,8 @@ const cargarBase = async() => {
   
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
-  server.listen(3001, () => {
+  server.listen(process.env.PORT, () => {
+  //server.listen(3001, () => {
     cargarBase()
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
