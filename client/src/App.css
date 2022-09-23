@@ -7,8 +7,9 @@
   background: url("https://news.mxendurance.com/content/images/2020/07/Earth-slider.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
   margin-top: -50px;
-  height:100%
+  height:100%;
 }
 .boton {
   min-width: 130px;
